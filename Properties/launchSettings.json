@@ -2,7 +2,7 @@
   "profiles": {
     "NormalizeIniFiles": {
       "commandName": "Project",
-      "commandLineArgs": "asdf qwer"
+      "commandLineArgs": "\"C:\\Users\\josh\\source\\repos\\NormalizeIniFiles\\Aiyya_test.ini\""
     }
   }
 }

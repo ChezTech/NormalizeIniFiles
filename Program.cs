@@ -6,14 +6,9 @@ namespace NormalizeIniFiles
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(args.Length);
-            Console.WriteLine(args[0]);
-            Console.WriteLine(args[1]);
-        }
-
-        private bool ValidateArgs(string[] args)
-        {
-            return false;
+            var clisArgs = new CliArgs(args);
+            if (!clisArgs.IsValid)
+                Console.Error.WriteLine($"Invalid arguments: {clisArgs.ErrorReason}");
         }
     }
 }
