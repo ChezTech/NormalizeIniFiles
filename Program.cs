@@ -6,9 +6,13 @@ namespace NormalizeIniFiles
     {
         static void Main(string[] args)
         {
-            var clisArgs = new CliArgs(args);
-            if (!clisArgs.IsValid)
-                Console.Error.WriteLine($"Invalid arguments: {clisArgs.ErrorReason}");
+            var cliArgs = new CliArgs(args);
+            if (!cliArgs.IsValid)
+                Console.Error.WriteLine($"Invalid arguments: {cliArgs.ErrorReason}");
+
+            var normalizer = new Normalizer();
+            normalizer.NormalizeFile(cliArgs.FilePath);
+            Console.WriteLine($"File has been normalized: ${cliArgs.FilePath}");
         }
     }
 }

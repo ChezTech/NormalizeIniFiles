@@ -4,7 +4,7 @@ namespace NormalizeIniFiles
 {
     class CliArgs
     {
-        public FileInfo FilePath { get; private set; }
+        public string FilePath { get; private set; }
         public bool IsValid { get; private set; }
         public string ErrorReason { get; private set; }
 
@@ -28,7 +28,7 @@ namespace NormalizeIniFiles
                 return false;
             }
 
-            FilePath = new FileInfo(filePath);
+            FilePath = new FileInfo(filePath).FullName;
 
             return true;
         }
