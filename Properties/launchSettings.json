@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NormalizeIniFiles": {
+      "commandName": "Project",
+      "commandLineArgs": "asdf qwer"
+    }
+  }
+}
