@@ -8,7 +8,10 @@ namespace NormalizeIniFiles
         {
             var cliArgs = new CliArgs(args);
             if (!cliArgs.IsValid)
+            {
                 Console.Error.WriteLine($"Invalid arguments: {cliArgs.ErrorReason}");
+                return;
+            }
 
             var normalizer = new Normalizer();
             normalizer.NormalizeFile(cliArgs.FilePath);
