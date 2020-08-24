@@ -24,9 +24,10 @@ namespace NormalizeIniFiles
             var tempFile = Path.GetTempFileName();
             File.WriteAllLines(tempFile, fileLines);
 
-            var fileBak = Path.ChangeExtension(filePath, ".ini.bak");
-            File.Move(filePath, fileBak);
-            File.Move(tempFile, filePath);
+            // todo: make arg option
+            //var fileBak = Path.ChangeExtension(filePath, ".ini.bak");
+            //File.Move(filePath, fileBak);
+            File.Move(tempFile, filePath, true);
         }
 
         class IniWriter
