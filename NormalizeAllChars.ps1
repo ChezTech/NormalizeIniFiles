@@ -12,15 +12,21 @@ $NormalizeExecutablePath = ".\NormalizeIniFiles.exe"
 function NormalizeFile()
 {
     param ($FilePath)
-    Start-Process -FilePath $NormalizeExecutablePath -ArgumentList $FilePath -WindowStyle Hidden
-    #-NoNewWindow # This doesn't work though it seems like it should be the better option instead of hiding the window
+
+    # "Normalizing file: " + $FilePath
+
+    Start-Process `
+        -FilePath $NormalizeExecutablePath `
+        -ArgumentList """$FilePath""" `
+        -NoNewWindow `
+        -Wait
 }
 
 function NormalizeAllFilesForName()
 {
     param ($CharName)
-
-
+    "=============== Normalizing character: " + $CharName
+    
     NormalizeFile( Join-Path -Path $BaseEQFolder -ChildPath ($CharName + "_eqclient.ini"))
     NormalizeFile( Join-Path -Path $BaseEQFolder -ChildPath ($CharName + "_test.ini"))
     NormalizeFile( Join-Path -Path $BaseEQFolder -ChildPath ("UI_" + $CharName + "_test.ini"))
@@ -28,3 +34,5 @@ function NormalizeAllFilesForName()
 
 
 $AllCharNames | ForEach-Object {NormalizeAllFilesForName($_)}
+
+#NormalizeFile("C:\Users\Public\Daybreak Game Company\Installed Games\EverQuest\aaaaa_test.ini")
