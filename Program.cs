@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
@@ -22,20 +23,23 @@ namespace NormalizeIniFiles
             // https://github.com/dotnet/command-line-api
             // Tab completion: https://github.com/dotnet/command-line-api/blob/main/docs/dotnet-suggest.md
 
+            // Example args:
+            // --file "C:\Users\Public\Daybreak Game Company\Installed Games\EverQuest\Aiyya_test.ini" --file "C:\Users\Public\Daybreak Game Company\Installed Games\EverQuest\UI_Aiyya_test.ini"
+
             var rootCommand = new RootCommand
             {
-                new Option<FileInfo>(new [] {"--file", "-f"}) {
-                    Description ="The name of the .ini file to normalize",
-                    Argument = new Argument<FileInfo>().ExistingOnly(),
-                    IsRequired=true,
+                new Option<IEnumerable<FileInfo>>(new[] { "--file", "-f" })
+                {
+                    Description = "The name of the .ini file(s) to normalize. May specify more than one.",
+                    Argument = new Argument<IEnumerable<FileInfo>>() { Arity = ArgumentArity.OneOrMore }.ExistingOnly(),
+                    IsRequired = true,
                 },
             };
 
             rootCommand.Description = @"Sort the keys and options (normalize) for a .ini file(s)
 This is useful for consistent comparision when checking into source control.";
 
-            // Specify the handler once the args are parsed
-            rootCommand.Handler = CommandHandler.Create<FileInfo>((file) =>
+            rootCommand.Handler = CommandHandler.Create<IEnumerable<FileInfo>>((file) =>
             {
                 return new Program().MainHandler(file);
             });
@@ -71,11 +75,14 @@ This is useful for consistent comparision when checking into source control.";
             return args;
         }
 
-        private async Task<int> MainHandler(FileInfo file)
+        private int MainHandler(IEnumerable<FileInfo> files)
         {
-            var normalizer = new Normalizer();
-            normalizer.NormalizeFile(file.FullName);
-            Console.WriteLine($"File has been normalized: {file.FullName}");
+            foreach (var file in files)
+            {
+                var normalizer = new Normalizer();
+                normalizer.NormalizeFile(file.FullName);
+                Console.WriteLine($"File has been normalized: {file.FullName}");
+            }
 
             return 0;
         }
