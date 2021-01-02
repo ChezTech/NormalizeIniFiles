@@ -31,7 +31,7 @@ namespace NormalizeIniFiles
                 new Option<IEnumerable<FileInfo>>(new[] { "--file", "-f" })
                 {
                     Description = "The name of the .ini file(s) to normalize. May specify more than one.",
-                    Argument = new Argument<IEnumerable<FileInfo>>() { Arity = ArgumentArity.OneOrMore }.ExistingOnly(),
+                    Argument = new Argument<IEnumerable<FileInfo>>().ExistingOnly(),
                     IsRequired = true,
                 },
             };
