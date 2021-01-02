@@ -2,7 +2,7 @@
   "profiles": {
     "NormalizeIniFiles": {
       "commandName": "Project",
-      "commandLineArgs": "\"C:\\Users\\josh\\source\\repos\\NormalizeIniFiles\\Aiyya_test.ini\""
+      "commandLineArgs": "--file \"C:\\Users\\Public\\Daybreak Game Company\\Installed Games\\EverQuest\\Aiyya_test.ini\""
     }
   }
 }
