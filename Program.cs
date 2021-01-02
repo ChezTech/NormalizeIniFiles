@@ -77,12 +77,12 @@ This is useful for consistent comparision when checking into source control.";
 
         private int MainHandler(IEnumerable<FileInfo> files)
         {
-            foreach (var file in files)
+            Parallel.ForEach(files, file =>
             {
                 var normalizer = new Normalizer();
                 normalizer.NormalizeFile(file.FullName);
                 Console.WriteLine($"File has been normalized: {file.FullName}");
-            }
+            });
 
             return 0;
         }
